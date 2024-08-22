@@ -2,7 +2,7 @@ CC = c++
 
 CCFLAGS = -Wall -Werror -Wextra
 
-NAME = karen
+NAME = harl
 
 INC = -Iincludes
 

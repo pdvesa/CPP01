@@ -1,11 +1,11 @@
-#include <Karen.hpp>
+#include <Harl.hpp>
 
 int main() {
-    Karen       karen;
+    Harl        harl;
     std::string level;
     
     for (int i = 0; i < 10; i++) {
         level = std::to_string(i);
-        karen.complain(level);
+        harl.complain(level);
     }
 }
