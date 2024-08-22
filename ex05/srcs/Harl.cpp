@@ -17,7 +17,23 @@ void Harl::error(void) {
 }
 
 void Harl::complain(std::string level) {
+    int lvl;
     int i;
-    i = stoi(level); //add error checks
-    (this->*complainArray[i % 4])();
+    
+    lvl = static_cast<int>(level[0]);
+    switch (lvl) {
+        case 68: 
+            i = 0;
+            break;
+        case 73:
+            i = 1;
+            break;
+        case 87:
+            i = 2;
+            break;
+        case 69:
+            i = 3;
+            break;
+    }
+    (this->*complainArray[i])();
 }

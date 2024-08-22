@@ -2,7 +2,7 @@ CC = c++
 
 CCFLAGS = -Wall -Werror -Wextra
 
-NAME = harl
+NAME = harlFilter
 
 INC = -Iincludes
 
