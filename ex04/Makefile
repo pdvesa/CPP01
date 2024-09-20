@@ -11,7 +11,10 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CCFLAGS) $(SRCS) -o $(NAME)
+	$(CC) $(CCFLAGS) -o $@ $^
+
+%.o: %.cpp
+	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)

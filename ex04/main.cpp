@@ -2,8 +2,7 @@
 #include <iostream>
 #include <sstream>
 
-void manipulateContent(std::string &content, char *argv[])
-{
+void manipulateContent(std::string &content, char *argv[]) {
     std::string search(argv[2]);
     std::string destroy(argv[3]);
     size_t      pos = 0;
@@ -18,34 +17,39 @@ void manipulateContent(std::string &content, char *argv[])
     }
 }
 
-int writeOutput(std::string &content, char *argv)
-{
+int writeOutput(std::string &content, char *argv) {
     std::ofstream   outFile;
     std::string     name(argv);
     
     name = name + ".replace";
     outFile.open(name);
+    if (!outFile.is_open()) {
+        std::cout << "Error. You funny guy removed permissions from existing *.replace file" << std::endl;
+        return (EXIT_FAILURE);
+    }
     outFile << content;
     outFile.close();
     return (EXIT_SUCCESS);
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     if (argc != 4) {
-        std::cout << "Absolutely incorrect usage of this program, monke" << std::endl;
+        std::cout << "Absolutely incorrect usage of this program" << std::endl;
         return (EXIT_FAILURE);
     }
     std::ifstream       inFile(argv[1]);
     std::stringstream   stream;
     std::string         content;
     
-    //error here for infile
+    if (!inFile.is_open()) {
+        std::cout << "Error. Might be a problem with the permissions, might be that the file doesn't even exists. Who knows." << std::endl;
+        return (EXIT_FAILURE);
+    }
     stream << inFile.rdbuf();
     inFile.close();
     content = stream.str();
     manipulateContent(content, argv);
-    writeOutput(content, argv[1]);
-    //error for outfile
+    if (writeOutput(content, argv[1]))
+        return (EXIT_FAILURE);
     return (EXIT_SUCCESS);
 }
